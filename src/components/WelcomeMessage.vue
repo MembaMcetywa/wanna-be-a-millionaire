@@ -2,33 +2,40 @@
   <div>
     <div class="welcome-container">
       <div class="welcome-container-header">
-        <h1>Million dollar baby</h1>
-        <div class="welcome-container-sub">Click start to start playing</div>
+        <h1 :style="{ color: headerColor }">Million dollar baby</h1>
+        <div class="welcome-container-sub">Click to start</div>
       </div>
-      <StartButton @Click="console.log('okay thats right')">Start Game</StartButton>
+      <StartButton @click="startGame">Start Game</StartButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import StartButton from '../components/StartButton.vue'
 
-defineComponent({
-  name: 'WelcomeMessage',
-  components: {
-    StartButton
-  },
-  setup() {
-    const startGame = () => {
-      console.log('hello')
-    }
+const headerColor = ref('blue')
+let colorIndex = 0
+const colors = ['blue', '#EDAB18', '#FC5000', 'red']
 
-    return {
-      startGame
-    }
-  }
+const changeColor = () => {
+  colorIndex = (colorIndex + 1) % colors.length
+  headerColor.value = colors[colorIndex]
+}
+
+let intervalId: number
+
+onMounted(() => {
+  intervalId = window.setInterval(changeColor, 500)
 })
+
+onUnmounted(() => {
+  clearInterval(intervalId)
+})
+
+const startGame = () => {
+  console.log('hello')
+}
 </script>
 
 <style scoped>
