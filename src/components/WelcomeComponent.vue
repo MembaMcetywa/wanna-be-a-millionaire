@@ -13,10 +13,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import StartButton from '../components/StartButton.vue'
+import { useRouter } from 'vue-router'
+import { useGameDetailsStore } from '../stores/gamestore'
 
 const headerColor = ref('blue')
 let colorIndex = 0
 const colors = ['blue', '#EDAB18', '#FC5000', 'red']
+const { questions, fetchQuestions } = useGameDetailsStore()
 
 const changeColor = () => {
   colorIndex = (colorIndex + 1) % colors.length
@@ -25,16 +28,23 @@ const changeColor = () => {
 
 let intervalId: number
 
-onMounted(() => {
+onMounted(async () => {
   intervalId = window.setInterval(changeColor, 500)
+  await fetchQuestions()
 })
 
 onUnmounted(() => {
   clearInterval(intervalId)
 })
 
+const router = useRouter()
 const startGame = () => {
-  console.log('hello')
+  if (questions) {
+    router.push({ name: 'game' })
+  } else {
+    console.error('Something went wrong while fetching questions, please try again.')
+    return
+  }
 }
 </script>
 
