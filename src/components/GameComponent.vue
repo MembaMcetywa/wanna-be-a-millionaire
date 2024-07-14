@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <div v-if="currentQuestion">
+  <div v-if="currentQuestion" class="game-container">
+    <div class="game-container-details">
       <PlayerStatsComponent :totalScore="totalScore" :winnings="winnings" />
       <TimerComponent ref="timer" @timeOut="handleTimeOut" />
       <QuestionComponent :question="currentQuestion" @answerSelected="handleAnswer" />
     </div>
-    <div v-else>
-      <h2>Game over! Your score: {{ correctAnswers }}</h2>
-      <button @click="restartGame">Restart Game</button>
+    <div class="game-container-actions">
+      <CustomButton @click="endGame">Cash Out $$</CustomButton>
     </div>
+  </div>
+  <div v-else>
+    <h2>Game over! Your score: {{ correctAnswers }}</h2>
+    <CustomButton @click="restartGame">Restart Game</CustomButton>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ import { useGameDetailsStore } from '../stores/gameDetailsStore'
 import QuestionComponent from './QuestionComponent.vue'
 import TimerComponent from './TimerComponent.vue'
 import PlayerStatsComponent from './PlayerStatsComponent.vue'
+import CustomButton from './CustomButton.vue'
 
 const store = useGameDetailsStore()
 const currentIndex = ref(0)
@@ -70,4 +74,17 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.game-container-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+</style>
