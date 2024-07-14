@@ -14,7 +14,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import StartButton from '../components/StartButton.vue'
 import { useRouter } from 'vue-router'
-import { useGameDetailsStore } from '../stores/gamestore'
+import { useGameDetailsStore } from '../stores/gameDetailsStore'
 
 const headerColor = ref('blue')
 let colorIndex = 0
