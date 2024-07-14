@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGameDetailsStore } from '../stores/gamestore'
+import { useGameDetailsStore } from '../stores/gameDetailsStore'
 
 const { questions } = useGameDetailsStore()
 
