@@ -1,52 +1,69 @@
 <template>
   <div>
     <div v-if="currentQuestion">
+      <TimerComponent ref="timer" @timeOut="handleTimeOut" />
       <QuestionComponent :question="currentQuestion" @answerSelected="handleAnswer" />
     </div>
     <div v-else>
       <h2>Game over! Your score: {{ correctAnswers }}</h2>
+      <button @click="restartGame">Restart Game</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
 import QuestionComponent from './QuestionComponent.vue'
-import type { Question } from '../utils/types'
+import TimerComponent from './TimerComponent.vue'
 
-const { totalScore, questions, score, increaseCorrectAnswers, increaseWinnings } =
-  useGameDetailsStore()
-
+const store = useGameDetailsStore()
 const currentIndex = ref(0)
 const correctAnswers = ref(0)
 
-const currentQuestion = computed((): Question | null => {
-  return questions[currentIndex.value] || null
-})
+const timer = ref<any | null>(null)
+
+const currentQuestion = computed(() => store.questions[currentIndex.value] || null)
 
 function handleAnswer(selectedOption: string) {
-  if (!currentQuestion.value) return
-
-  if (selectedOption === currentQuestion.value.correctAnswer) {
+  if (selectedOption === currentQuestion.value?.correctAnswer) {
     correctAnswers.value++
-    increaseCorrectAnswers()
-
-    if (currentIndex.value < questions.length - 1) {
+    store.increaseCorrectAnswers()
+    if (currentIndex.value < store.questions.length - 1) {
       currentIndex.value++
+      timer.value?.restartTimer()
     } else {
-      alert('quiz ended')
+      endGame()
     }
+  } else {
+    endGame()
   }
 }
 
-watchEffect(() => {
-  console.log('Current state:', {
-    questions: questions,
-    score: score,
-    correctAnswers: correctAnswers.value,
-    totalScore: totalScore
-  })
+function handleTimeOut() {
+  console.log("Time's up!")
+  endGame()
+}
+
+function restartGame() {
+  currentIndex.value = 0
+  correctAnswers.value = 0
+  if (timer.value) {
+    timer.value.restartTimer()
+  }
+}
+
+function endGame() {
+  currentIndex.value = store.questions.length
+  if (timer.value) {
+    clearInterval(timer.value.intervalId)
+  }
+}
+
+onMounted(() => {
+  if (timer.value) {
+    timer.value.restartTimer()
+  }
 })
 </script>
 
