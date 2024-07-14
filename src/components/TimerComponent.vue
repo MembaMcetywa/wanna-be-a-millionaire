@@ -40,7 +40,6 @@ defineExpose({
   display: flex;
   justify-content: flex-end;
   font-size: 1rem;
-
   transition: color 0.5s ease;
 }
 </style>
