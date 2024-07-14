@@ -10,8 +10,21 @@
     </div>
   </div>
   <div v-else>
-    <h2>Game over! Your score: {{ correctAnswers }}</h2>
-    <CustomButton @click="restartGame">Restart Game</CustomButton>
+    <div class="game-over-container">
+      <h2>Game over!</h2>
+      <ul class="game-over-container-summary">
+        <li>
+          Your score: <span class="summary-value">{{ totalScore }}</span>
+        </li>
+        <li>
+          Correct answers: <span class="summary-value">{{ correctAnswers }}</span>
+        </li>
+        <li>
+          Winnings: <span class="summary-value">${{ winnings }}</span>
+        </li>
+      </ul>
+      <CustomButton @click="restartGame">Restart Game</CustomButton>
+    </div>
   </div>
 </template>
 
@@ -79,6 +92,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .game-container-actions {
@@ -86,5 +100,32 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+.game-over-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.game-over-container h2 {
+  font-weight: 600;
+}
+
+.game-over-container h2:hover {
+  font-weight: 600;
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+.game-over-container-summary {
+  padding: 0;
+  list-style-type: none;
+  font-size: 1rem;
+}
+
+.summary-value {
+  font-weight: 600;
+  color: #f5f4f2;
 }
 </style>
