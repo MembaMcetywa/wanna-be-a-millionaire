@@ -2,7 +2,7 @@
   <div>
     <div class="welcome-container">
       <div class="welcome-container-header">
-        <h1 :style="{ color: headerColor }">Million dollar baby</h1>
+        <h1 :style="{ color: headerColor }">Skyf A Million</h1>
         <div class="welcome-container-sub">Click to start</div>
       </div>
       <StartButton @click="startGame">Start Game</StartButton>
@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import StartButton from '../components/StartButton.vue'
+import StartButton from './CustomButton.vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
 
