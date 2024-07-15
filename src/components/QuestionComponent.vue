@@ -71,6 +71,7 @@ li {
   padding: 10px;
   border-radius: 5px;
   color: #0d0e10;
+  width: 100%;
 }
 
 li:hover {
@@ -79,5 +80,12 @@ li:hover {
 
 .option-details {
   color: #666;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 32rem;
 }
 </style>
