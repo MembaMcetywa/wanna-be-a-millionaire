@@ -11,9 +11,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import StartButton from './CustomButton.vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
+import StartButton from './CustomButton.vue'
 
 let colorIndex = 0
 let intervalId: number
@@ -38,8 +38,7 @@ onUnmounted(() => {
 })
 
 const startGame = () => {
-  if (store.questions) {
-    store.score = 0
+  if (store.questions.length > 0) {
     router.push({ name: 'game' })
   } else {
     console.error('Something went wrong while preparing questions, please try again.')
