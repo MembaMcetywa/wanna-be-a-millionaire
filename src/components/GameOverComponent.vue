@@ -12,8 +12,10 @@
         Winnings: <span class="summary-value">${{ winnings }}</span>
       </li>
     </ul>
-    <CustomButton @click="restartGame">Restart Game</CustomButton>
-    <CustomButton @click="navigateHome">Go Home</CustomButton>
+    <div class="game-over-container-actions">
+      <CustomButton @click="restartGame">Restart Game</CustomButton>
+      <CustomButton @click="navigateHome">Go Home</CustomButton>
+    </div>
   </div>
 </template>
 
@@ -67,5 +69,13 @@ function navigateHome() {
 .summary-value {
   font-weight: 600;
   color: #f5f4f2;
+}
+
+.game-over-container-actions {
+  width: 100%;
+  display: flex;
+  height: fit-content;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 </style>
