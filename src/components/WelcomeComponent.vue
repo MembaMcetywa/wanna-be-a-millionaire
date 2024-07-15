@@ -5,21 +5,23 @@
       <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
     </div>
     <StartButton @click="startGame">Start Game</StartButton>
+    <p class="welcome-container-sub">Current Score: {{ totalScore }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import StartButton from './CustomButton.vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
+import StartButton from './CustomButton.vue'
 
 let colorIndex = 0
 let intervalId: number
 const headerColor = ref('blue')
-const colors = ['blue', '#EDAB18', '#FC5000', 'red']
+const colors = ['blue', '#FC5000', '#EDAB18', 'red']
 const router = useRouter()
-const { questions, fetchQuestions } = useGameDetailsStore()
+const store = useGameDetailsStore()
+let totalScore = computed(() => store.score)
 
 const changeColor = () => {
   colorIndex = (colorIndex + 1) % colors.length
@@ -28,7 +30,7 @@ const changeColor = () => {
 
 onMounted(async () => {
   intervalId = window.setInterval(changeColor, 500)
-  await fetchQuestions()
+  await store.fetchQuestions()
 })
 
 onUnmounted(() => {
@@ -36,10 +38,10 @@ onUnmounted(() => {
 })
 
 const startGame = () => {
-  if (questions) {
+  if (store.questions.length > 0) {
     router.push({ name: 'game' })
   } else {
-    console.error('Something went wrong while fetching questions, please try again.')
+    console.error('Something went wrong while preparing questions, please try again.')
     return
   }
 }

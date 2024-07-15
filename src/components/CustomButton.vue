@@ -39,8 +39,8 @@ export default defineComponent({
 .button-div {
   display: inline-flex;
   justify-content: center;
-  width: 12rem;
-  padding: 0.5rem 1.5rem;
+  width: 8rem;
+  padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: white;
   background-color: blue;

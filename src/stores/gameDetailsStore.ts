@@ -1,17 +1,18 @@
-// In your useGameDetailsStore definition
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
 import type { Question } from '../utils/types'
 
 export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const questions = ref<Question[]>([])
   const score = ref<number>(0)
+  const recentScore = ref(0)
   const winnings = ref<number>(10)
   const correctAnswers = ref<number>(0)
   const currentIndex = ref<number>(0)
 
   const restartGame = () => {
+    recentScore.value = score.value
     currentIndex.value = 0
     score.value = 0
     winnings.value = 10
@@ -20,9 +21,8 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get('https://668bd8230b61b8d23b0b68d9.mockapi.io/api/questions')
+      const response = await axios.get(import.meta.env.VITE_API_ENDPOINT)
       questions.value = response.data
-      console.log('Questions fetched and stored:', questions.value)
     } catch (error) {
       console.error('Failed to fetch questions:', error)
     }
@@ -57,6 +57,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   }
 
   const endGame = () => {
+    recentScore.value = score.value
     currentIndex.value = questions.value.length
   }
 
@@ -65,6 +66,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
     currentIndex,
     score,
     winnings,
+    recentScore,
     correctAnswers,
     endGame,
     restartGame,
