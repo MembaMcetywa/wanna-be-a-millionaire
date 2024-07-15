@@ -13,6 +13,7 @@
       </li>
     </ul>
     <CustomButton @click="restartGame">Restart Game</CustomButton>
+    <CustomButton @click="navigateHome">Go Home</CustomButton>
   </div>
 </template>
 
@@ -31,6 +32,10 @@ const router = useRouter()
 function restartGame() {
   store.restartGame()
   router.push({ name: 'game' })
+}
+function navigateHome() {
+  store.endGame()
+  router.push({ name: 'home' })
 }
 </script>
 
