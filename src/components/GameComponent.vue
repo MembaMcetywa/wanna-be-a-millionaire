@@ -39,15 +39,14 @@ import CustomButton from './CustomButton.vue'
 const store = useGameDetailsStore()
 const currentIndex = ref(0)
 const correctAnswers = computed(() => store.correctAnswers)
-const totalScore = computed(() => store.totalScore)
+const totalScore = computed(() => store.score)
 const winnings = computed(() => store.winnings)
 const timer = ref<any | null>(null)
 const currentQuestion = computed(() => store.questions[currentIndex.value] || null)
 
 function handleAnswer(selectedOption: string) {
   if (selectedOption === currentQuestion.value?.correctAnswer) {
-    store.increaseWinnings(10)
-    store.increaseCorrectAnswers()
+    store.increaseScoreAndWinnings(currentQuestion.value.difficulty)
     if (currentIndex.value < store.questions.length - 1) {
       currentIndex.value++
       timer.value?.restartTimer()
@@ -109,12 +108,14 @@ onMounted(() => {
 
 .game-over-container h2 {
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .game-over-container h2:hover {
   font-weight: 600;
   text-decoration: line-through;
   cursor: pointer;
+  color: red;
 }
 
 .game-over-container-summary {
