@@ -108,12 +108,14 @@ onMounted(() => {
 
 .game-over-container h2 {
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .game-over-container h2:hover {
   font-weight: 600;
   text-decoration: line-through;
   cursor: pointer;
+  color: red;
 }
 
 .game-over-container-summary {
