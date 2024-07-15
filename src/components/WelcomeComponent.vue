@@ -5,11 +5,12 @@
       <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
     </div>
     <StartButton @click="startGame">Start Game</StartButton>
+    <p class="welcome-container-sub">Current Score: {{ totalScore }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import StartButton from './CustomButton.vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
@@ -20,6 +21,7 @@ const headerColor = ref('blue')
 const colors = ['blue', '#FC5000', '#EDAB18', 'red']
 const router = useRouter()
 const store = useGameDetailsStore()
+let totalScore = computed(() => store.score)
 
 const changeColor = () => {
   colorIndex = (colorIndex + 1) % colors.length
@@ -37,6 +39,7 @@ onUnmounted(() => {
 
 const startGame = () => {
   if (store.questions) {
+    store.score = 0
     router.push({ name: 'game' })
   } else {
     console.error('Something went wrong while preparing questions, please try again.')

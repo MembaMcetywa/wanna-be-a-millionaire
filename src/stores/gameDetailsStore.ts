@@ -7,11 +7,13 @@ import type { Question } from '../utils/types'
 export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const questions = ref<Question[]>([])
   const score = ref<number>(0)
+  const recentScore = ref(0)
   const winnings = ref<number>(10)
   const correctAnswers = ref<number>(0)
   const currentIndex = ref<number>(0)
 
   const restartGame = () => {
+    recentScore.value = score.value
     currentIndex.value = 0
     score.value = 0
     winnings.value = 10
@@ -57,6 +59,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   }
 
   const endGame = () => {
+    recentScore.value = score.value
     currentIndex.value = questions.value.length
   }
 
@@ -65,6 +68,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
     currentIndex,
     score,
     winnings,
+    recentScore,
     correctAnswers,
     endGame,
     restartGame,
