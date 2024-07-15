@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="welcome-container">
-      <div class="welcome-container-header">
-        <h1 :style="{ color: headerColor }">Skyf A Million</h1>
-        <div class="welcome-container-sub">Click to start</div>
-      </div>
-      <StartButton @click="startGame">Start Game</StartButton>
+  <div class="welcome-container">
+    <div class="welcome-container-header">
+      <h1 :style="{ color: headerColor }">Skyf A Million</h1>
+      <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
     </div>
+    <StartButton @click="startGame">Start Game</StartButton>
   </div>
 </template>
 
@@ -97,7 +95,6 @@ const startGame = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   gap: 2rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -108,6 +105,11 @@ const startGame = () => {
   align-items: center;
 }
 .welcome-container-header h1 {
+  font-weight: 600;
+  letter-spacing: 0.125rem;
+}
+.welcome-container-sub {
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 </style>
