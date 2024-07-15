@@ -9,6 +9,14 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const score = ref<number>(0)
   const winnings = ref<number>(10)
   const correctAnswers = ref<number>(0)
+  const currentIndex = ref<number>(0)
+
+  const restartGame = () => {
+    currentIndex.value = 0
+    score.value = 0
+    winnings.value = 10
+    correctAnswers.value = 0
+  }
 
   const fetchQuestions = async () => {
     try {
@@ -48,11 +56,18 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
     correctAnswers.value++
   }
 
+  const endGame = () => {
+    currentIndex.value = questions.value.length
+  }
+
   return {
     questions,
+    currentIndex,
     score,
     winnings,
     correctAnswers,
+    endGame,
+    restartGame,
     fetchQuestions,
     increaseScoreAndWinnings
   }
