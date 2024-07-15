@@ -1,6 +1,5 @@
-// In your useGameDetailsStore definition
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
 import type { Question } from '../utils/types'
 
@@ -22,9 +21,8 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get('https://668bd8230b61b8d23b0b68d9.mockapi.io/api/questions')
+      const response = await axios.get(import.meta.env.VITE_API_ENDPOINT)
       questions.value = response.data
-      console.log('Questions fetched and stored:', questions.value)
     } catch (error) {
       console.error('Failed to fetch questions:', error)
     }
