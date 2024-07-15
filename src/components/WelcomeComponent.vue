@@ -14,17 +14,17 @@ import StartButton from './CustomButton.vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
 
-const headerColor = ref('blue')
 let colorIndex = 0
+let intervalId: number
+const headerColor = ref('blue')
 const colors = ['blue', '#EDAB18', '#FC5000', 'red']
+const router = useRouter()
 const { questions, fetchQuestions } = useGameDetailsStore()
 
 const changeColor = () => {
   colorIndex = (colorIndex + 1) % colors.length
   headerColor.value = colors[colorIndex]
 }
-
-let intervalId: number
 
 onMounted(async () => {
   intervalId = window.setInterval(changeColor, 500)
@@ -35,7 +35,6 @@ onUnmounted(() => {
   clearInterval(intervalId)
 })
 
-const router = useRouter()
 const startGame = () => {
   if (questions) {
     router.push({ name: 'game' })
