@@ -17,9 +17,9 @@ import { useGameDetailsStore } from '../stores/gameDetailsStore'
 let colorIndex = 0
 let intervalId: number
 const headerColor = ref('blue')
-const colors = ['blue', '#EDAB18', '#FC5000', 'red']
+const colors = ['blue', '#FC5000', '#EDAB18', 'red']
 const router = useRouter()
-const { questions, fetchQuestions } = useGameDetailsStore()
+const store = useGameDetailsStore()
 
 const changeColor = () => {
   colorIndex = (colorIndex + 1) % colors.length
@@ -28,7 +28,7 @@ const changeColor = () => {
 
 onMounted(async () => {
   intervalId = window.setInterval(changeColor, 500)
-  await fetchQuestions()
+  await store.fetchQuestions()
 })
 
 onUnmounted(() => {
@@ -36,10 +36,10 @@ onUnmounted(() => {
 })
 
 const startGame = () => {
-  if (questions) {
+  if (store.questions) {
     router.push({ name: 'game' })
   } else {
-    console.error('Something went wrong while fetching questions, please try again.')
+    console.error('Something went wrong while preparing questions, please try again.')
     return
   }
 }
