@@ -107,6 +107,7 @@ const startGame = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 .welcome-container-header h1 {
   font-weight: 600;
@@ -115,5 +116,6 @@ const startGame = () => {
 .welcome-container-sub {
   font-size: 0.8125rem;
   font-weight: 600;
+  text-align: center;
 }
 </style>

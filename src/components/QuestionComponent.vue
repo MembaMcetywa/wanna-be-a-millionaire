@@ -83,6 +83,8 @@ li:hover {
   font-size: 0.825rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .question-option:hover {
@@ -93,6 +95,21 @@ li:hover {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 32rem;
+  width: 100%;
+  transition: min-width 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .question {
+    width: 100%;
+    min-width: 28rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .question {
+    width: 100%;
+    min-width: 32rem;
+  }
 }
 </style>
