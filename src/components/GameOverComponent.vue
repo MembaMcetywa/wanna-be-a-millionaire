@@ -45,6 +45,7 @@ function navigateHome() {
 .game-over-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
