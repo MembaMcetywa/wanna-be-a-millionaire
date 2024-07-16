@@ -3,8 +3,8 @@
     <h2>{{ question.question }}</h2>
     <ul>
       <li v-for="option in question.options" :key="option" @click="selectOption(option)">
-        {{ option }}
-        <span class="option-details"
+        <span class="question-option">{{ option }}</span>
+        <span class="question-option-details"
           >{{ rewards.scoreIncrease }} points ${{ rewards.winningsIncrease }}</span
         >
       </li>
@@ -78,8 +78,15 @@ li:hover {
   background-color: #e0e0e0;
 }
 
-.option-details {
+.question-option-details {
   color: #666;
+  font-size: 0.825rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.question-option:hover {
+  color: #5e7c3c;
 }
 
 .question {
