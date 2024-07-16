@@ -76,8 +76,32 @@ onMounted(() => {
 .game-container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow-y: auto;
+  transition: max-width 0.3s ease;
+  width: 100%;
+  min-width: 21rem;
+}
+
+@media (min-width: 768px) {
+  .game-container {
+    width: 30rem;
+
+    /* gap: 1rem; */
+  }
+}
+
+@media (min-width: 992px) {
+  .game-container {
+    width: 40rem;
+    gap: 3rem;
+  }
+}
+
+.game-container-details {
+  height: fit-content;
+  width: 100%;
 }
 
 .game-container-actions {
