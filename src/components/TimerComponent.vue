@@ -9,7 +9,7 @@ import { ref, onMounted, onUnmounted, defineExpose } from 'vue'
 
 const emits = defineEmits(['timeOut'])
 const timeLeft = ref(30)
-let intervalId: number | undefined = undefined
+let intervalId: any = undefined
 
 function startTimer() {
   clearInterval(intervalId)
