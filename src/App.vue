@@ -26,6 +26,13 @@ nav {
   margin-top: 2rem;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
