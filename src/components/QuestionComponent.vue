@@ -1,6 +1,9 @@
 <template>
   <div class="question">
-    <h2>{{ question.question }}</h2>
+    <div class="question-text">
+      <h2>{{ question.question }}</h2>
+      <span class="question-difficulty">{{ question.difficulty }}</span>
+    </div>
     <ul>
       <li v-for="option in question.options" :key="option" @click="selectOption(option)">
         <span class="question-option">{{ option }}</span>
@@ -97,6 +100,10 @@ li:hover {
   flex-wrap: wrap;
   width: 100%;
   transition: min-width 0.3s ease;
+}
+
+.question-difficulty {
+  font-size: 0.875rem;
 }
 
 @media (min-width: 768px) {
