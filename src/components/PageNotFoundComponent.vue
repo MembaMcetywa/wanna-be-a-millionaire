@@ -1,8 +1,8 @@
 <template>
-  <div class="game-over-container">
+  <div class="not-found-container">
     <h2>Oops! Wrong Page</h2>
     <p>This page doesn't exist. Return home to play a game.</p>
-    <div class="game-over-container-actions">
+    <div class="not-found-container-actions">
       <CustomButton @click="navigateHome">Go Home</CustomButton>
     </div>
   </div>
@@ -22,7 +22,7 @@ function navigateHome() {
 }
 </script>
 <style>
-.game-over-container {
+.not-found-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,14 +30,18 @@ function navigateHome() {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.game-over-container h2 {
+.not-found-container h2 {
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
-.game-over-container h2:hover {
+.not-found-container h2:hover {
   text-decoration: line-through;
   cursor: pointer;
   color: red;
+}
+
+.not-found-container p {
+  text-align: center;
 }
 </style>
