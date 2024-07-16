@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WelcomeView from '../views/WelcomeView.vue'
 import GameView from '../views/GameView.vue'
 import SummaryView from '../views/SummaryView.vue'
+import PageNotFoundView from '../views/PageNotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/summary',
       name: 'summary',
       component: SummaryView
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: PageNotFoundView
     }
   ]
 })
