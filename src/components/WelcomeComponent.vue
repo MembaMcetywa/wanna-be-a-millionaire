@@ -39,6 +39,9 @@ onUnmounted(() => {
 
 const startGame = () => {
   if (store.questions.length > 0) {
+    store.score = 0
+    store.winnings = 10
+    store.correctAnswers = 0
     router.push({ name: 'game' })
   } else {
     console.error('Something went wrong while preparing questions, please try again.')

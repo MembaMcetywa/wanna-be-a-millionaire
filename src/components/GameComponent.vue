@@ -6,7 +6,7 @@
       <QuestionComponent :question="currentQuestion" @answerSelected="handleAnswer" />
     </div>
     <div class="game-container-actions">
-      <CustomButton @click="endGame">Cash Out $$</CustomButton>
+      <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ import QuestionComponent from './QuestionComponent.vue'
 import TimerComponent from './TimerComponent.vue'
 import PlayerStatsComponent from './PlayerStatsComponent.vue'
 import CustomButton from './CustomButton.vue'
+import cashOutSound from '../assets/audio/kaching.mp3'
 import { useRouter } from 'vue-router'
 
 const store = useGameDetailsStore()
@@ -29,6 +30,9 @@ const currentQuestion = computed(() => store.questions[currentIndex.value] || nu
 const totalScore = computed(() => store.score)
 const winnings = computed(() => store.winnings)
 
+//instance of cash register sound to be played on cash out
+const ballerAlert = new Audio(cashOutSound)
+
 function handleAnswer(selectedOption: string) {
   if (selectedOption === currentQuestion.value?.correctAnswer) {
     store.increaseScoreAndWinnings(currentQuestion.value.difficulty)
@@ -36,19 +40,24 @@ function handleAnswer(selectedOption: string) {
       currentIndex.value++
       timer.value?.restartTimer()
     } else {
-      endGame()
+      handleGameEnd()
     }
   } else {
-    endGame()
+    handleGameEnd()
   }
+}
+
+function handleCashOut() {
+  ballerAlert.play()
+  handleGameEnd()
 }
 
 function handleTimeOut() {
   console.log("Time's up!")
-  endGame()
+  handleGameEnd()
 }
 
-function endGame() {
+function handleGameEnd() {
   store.endGame()
   if (timer.value) {
     clearInterval(timer.value.intervalId)
