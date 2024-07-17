@@ -1,13 +1,13 @@
 <template>
   <CustomToast ref="errorModal" :message="errorMessage" />
-  <div class="welcome-container">
-    <div class="welcome-container-header">
+  <section class="welcome-container">
+    <header class="welcome-container-header">
       <h1 :style="{ color: headerColor }">Skyf A Million</h1>
       <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
-    </div>
+    </header>
     <StartButton @click="startGame">Start Game</StartButton>
     <p class="welcome-container-sub">Current Score: {{ totalScore }}</p>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

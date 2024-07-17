@@ -1,8 +1,8 @@
 <template>
-  <div class="stats">
+  <section class="stats">
     <p>Total Score: {{ props.totalScore }}</p>
     <p>Winnings: ${{ props.winnings }}</p>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

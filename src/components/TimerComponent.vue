@@ -1,7 +1,7 @@
 <template>
-  <div class="timer" :style="{ color: timeLeft <= 10 ? 'red' : '#f5f4f2' }">
+  <p class="timer" :style="{ color: timeLeft <= 10 ? 'red' : '#f5f4f2' }">
     Time left: {{ timeLeft }} {{ timeLeft == 1 ? 'second' : 'seconds' }}
-  </div>
+  </p>
 </template>
 
 <script setup lang="ts">

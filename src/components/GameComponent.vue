@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <section class="game-container">
     <div class="game-container-details">
       <PlayerStatsComponent :totalScore="totalScore" :winnings="winnings" />
       <TimerComponent ref="timer" @timeOut="handleTimeOut" />
@@ -8,7 +8,7 @@
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
