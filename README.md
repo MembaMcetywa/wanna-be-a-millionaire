@@ -4,9 +4,7 @@ The $outh African American game show.
 
 ## Assumptions (How it works)
 1. Users take part in a 12 question general knowledge quiz and WIN. They start with easy question and progress through to diffcult questions to score and win more. 
-<br>
 2. The more difficult the question the higher the reward. The rewards are mapped as key value pair like so (score : value) with the following structure:
-<br>
 3 (easy) :50
 <br>
 5 (medium) :80
