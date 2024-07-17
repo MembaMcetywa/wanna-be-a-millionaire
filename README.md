@@ -17,7 +17,7 @@ Users take part in a 12-question general knowledge quiz to win "cash", with ques
 3. Participants have 30 seconds to answer each question. Failure to answer within this time will end the game.
 4. Users can choose to cash out at any point during the quiz.
 5. The game can end due to a timeout, a wrong answer, or successful completion of all questions.
-6. The idea is for a continuous prodding of the user to play again but guaranteeing a win. Everyone likes to win especially money. And then the most recent score is displayed on the start screen, inspired by Google's Dino Game.
+6. The idea is for a continuous prodding of the user to play again by guaranteeing a win. Everyone likes to win especially money. And then the most recent score is displayed on the start screen, inspired by Google's Dino Game.
 
 ## Technologies Used
 
