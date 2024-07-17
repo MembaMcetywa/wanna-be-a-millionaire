@@ -21,10 +21,11 @@ Users take part in a 12-question general knowledge quiz to win "cash", with ques
 
 ## Technologies Used
 
-- **Vite**: Chosen for its fast build times utilizing ESBuild and efficient hot module replacement. Compatible with TypeScript and popular frontend frameworks.
-- **Vue 3**: The project's specified frontend framework.
-- **Vue Router**: Provides seamless routing options designed specifically for Vue applications, enhancing single-page application functionality.
-- **Axios**: Utilized for performing HTTP requests to backend services, known for its promise-based structure which simplifies async request handling.
+- **Vite**: Its a very fast build tool because it esbuild under the hood and works well with TypeScript and most frontend frameworks.
+- **Vue 3**: This was an explicit requirement for the project.
+- **Vue Router**: Provides seamless routing options designed specifically for Vue apps. Also presented a great learning opportunity which I took.
+- **Pinia**: Simple state management tool with great support for Vue.  Also presented a great learning opportunity which I took.
+- **Axios**: Standard package for performing HTTP requests to backend services.
 
 ## Setup
 
