@@ -1,4 +1,5 @@
 <template>
+  <CustomToast ref="errorModal" :message="errorMessage" :duration="30000" />
   <div class="welcome-container">
     <div class="welcome-container-header">
       <h1 :style="{ color: headerColor }">Skyf A Million</h1>
@@ -14,6 +15,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
 import StartButton from './CustomButton.vue'
+import CustomToast from './CustomToast.vue'
 
 let colorIndex = 0
 let intervalId: number
@@ -21,6 +23,8 @@ const headerColor = ref('blue')
 const colors = ['blue', '#FC5000', '#EDAB18', 'red']
 const router = useRouter()
 const store = useGameDetailsStore()
+const errorModal = ref<any>(null)
+const errorMessage = ref('')
 let totalScore = computed(() => store.score)
 
 const changeColor = () => {
@@ -28,9 +32,18 @@ const changeColor = () => {
   headerColor.value = colors[colorIndex]
 }
 
-onMounted(async () => {
+const fetchQuestions = async () => {
+  try {
+    await store.fetchQuestions()
+  } catch (error) {
+    errorMessage.value = 'Failed to load questions. Please refresh & try again.'
+    errorModal.value?.show()
+  }
+}
+
+onMounted(() => {
   intervalId = window.setInterval(changeColor, 500)
-  await store.fetchQuestions()
+  fetchQuestions()
 })
 
 onUnmounted(() => {
