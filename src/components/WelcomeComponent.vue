@@ -1,5 +1,5 @@
 <template>
-  <CustomToast ref="errorModal" :message="errorMessage" :duration="30000" />
+  <CustomToast ref="errorModal" :message="errorMessage" />
   <div class="welcome-container">
     <div class="welcome-container-header">
       <h1 :style="{ color: headerColor }">Skyf A Million</h1>
@@ -57,6 +57,7 @@ const startGame = () => {
     store.correctAnswers = 0
     router.push({ name: 'game' })
   } else {
+    errorMessage.value = 'Something went wrong while preparing questions, please try again.'
     console.error('Something went wrong while preparing questions, please try again.')
     return
   }
