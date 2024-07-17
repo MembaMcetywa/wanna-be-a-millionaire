@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="isVisible" class="modal">
+    <div v-if="isVisible" class="modal" role="alert" aria-label="Error Modal">
       <p>{{ message }}</p>
       <CustomButton @click="close">Close</CustomButton>
     </div>
