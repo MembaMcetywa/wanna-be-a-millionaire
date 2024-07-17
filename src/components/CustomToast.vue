@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import CustomButton from './CustomButton.vue'
 
 const props = defineProps({
@@ -18,12 +18,23 @@ const props = defineProps({
   },
   duration: {
     type: Number,
-    default: 1000
+    default: 2000
   }
 })
 
-//responsible for handling toast visibility. uses a given or default (1s) duration
+//using watch to react to changes in the message prop
 const isVisible = ref(false)
+watch(
+  () => props.message,
+  (newMessage) => {
+    if (newMessage) {
+      show()
+    }
+  },
+  { immediate: true }
+)
+
+//responsible for handling toast visibility. uses a given or default (1s) duration
 const show = () => {
   isVisible.value = true
   setTimeout(() => {
@@ -35,7 +46,11 @@ const close = () => {
   isVisible.value = false
 }
 
-onMounted(show)
+onMounted(() => {
+  if (props.message) {
+    show()
+  }
+})
 </script>
 
 <style scoped>
