@@ -16,7 +16,7 @@ import CustomButton from '../components/CustomButton.vue'
 const store = useGameDetailsStore()
 const router = useRouter()
 
-function navigateHome() {
+const navigateHome = () => {
   store.endGame()
   router.push({ name: 'home' })
 }

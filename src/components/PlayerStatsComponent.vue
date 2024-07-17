@@ -1,7 +1,7 @@
 <template>
   <div class="stats">
-    <p>Total Score: {{ totalScore }}</p>
-    <p>Winnings: ${{ winnings }}</p>
+    <p>Total Score: {{ props.totalScore }}</p>
+    <p>Winnings: ${{ props.winnings }}</p>
   </div>
 </template>
 

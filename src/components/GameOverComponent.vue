@@ -31,11 +31,11 @@ const correctAnswers = computed(() => store.correctAnswers)
 const winnings = computed(() => store.winnings)
 const router = useRouter()
 
-function restartGame() {
+const restartGame = () => {
   store.restartGame()
   router.push({ name: 'game' })
 }
-function navigateHome() {
+const navigateHome = () => {
   store.endGame()
   router.push({ name: 'home' })
 }

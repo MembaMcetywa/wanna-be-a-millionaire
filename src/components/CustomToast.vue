@@ -34,7 +34,7 @@ watch(
   { immediate: true }
 )
 
-//responsible for handling toast visibility. uses a given or default (1s) duration
+//responsible for handling toast visibility. uses a given or default (2s) duration
 const show = () => {
   isVisible.value = true
   setTimeout(() => {
