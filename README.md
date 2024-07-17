@@ -3,9 +3,9 @@
 The $outh African American game show.
 
 ## Assumptions (How it works)
-Users take part in a 12 question general knowledge quiz and WIN. They start with easy question and progress through to diffcult questions to score and win more. 
+1. Users take part in a 12 question general knowledge quiz and WIN. They start with easy question and progress through to diffcult questions to score and win more. 
 <br>
-The more difficult the question the higher the reward. The rewards are mapped as key value pair like so (score : value) with the following structure:
+2. The more difficult the question the higher the reward. The rewards are mapped as key value pair like so (score : value) with the following structure:
 <br>
 3 (easy) :50
 <br>
@@ -15,15 +15,15 @@ The more difficult the question the higher the reward. The rewards are mapped as
 <br>
 10 (very hard) :300
 <br>
-This makes the game dynamic and a bit more interesting. More importantly it gives users more incentive to try get to the end of the game.
+3. This makes the game dynamic and a bit more interesting. More importantly it gives users more incentive to try get to the end of the game.
 <br>
-Users have 30 seconds to answer each question. If the timer reaches zero it will trigger the end of that particular game.
+4. Users have 30 seconds to answer each question. If the timer reaches zero it will trigger the end of that particular game.
 <br>
-Users can cash out at any time during the quiz.
+5. Users can cash out at any time during the quiz.
 <br>
-Quiz can end in one of three ways, a timeout , a wrong answer, and completion.
+6. Quiz can end in one of three ways, a timeout , a wrong answer, and completion.
 <br>
-The idea is a continuous prodding of the user to play again, by guaranteeing at least some win which can add up considerably the longer you stay in the game. Then keep the latest score visible on the start screen. Inspired by Google's Dino Game.
+7. The idea is a continuous prodding of the user to play again, by guaranteeing at least some win which can add up considerably the longer you stay in the game. Then keep the latest score visible on the start screen. Inspired by Google's Dino Game.
 
 
 ## Technologies And Why
