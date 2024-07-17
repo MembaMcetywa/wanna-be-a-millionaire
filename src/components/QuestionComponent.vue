@@ -27,7 +27,7 @@ const emits = defineEmits<{
   (event: 'answerSelected', answer: string): void
 }>()
 
-function selectOption(option: string) {
+const selectOption = (option: string) => {
   emits('answerSelected', option)
 }
 

@@ -1,11 +1,11 @@
 <template>
-  <div class="not-found-container">
+  <section class="not-found-container">
     <h2>Oops! Wrong Page</h2>
     <p>This page doesn't exist. Return home to play a game.</p>
     <div class="not-found-container-actions">
       <CustomButton @click="navigateHome">Go Home</CustomButton>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,7 @@ import CustomButton from '../components/CustomButton.vue'
 const store = useGameDetailsStore()
 const router = useRouter()
 
-function navigateHome() {
+const navigateHome = () => {
   store.endGame()
   router.push({ name: 'home' })
 }

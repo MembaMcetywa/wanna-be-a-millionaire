@@ -1,8 +1,8 @@
 <template>
-  <div class="stats">
-    <p>Total Score: {{ totalScore }}</p>
-    <p>Winnings: ${{ winnings }}</p>
-  </div>
+  <section class="stats">
+    <p>Total Score: {{ props.totalScore }}</p>
+    <p>Winnings: ${{ props.winnings }}</p>
+  </section>
 </template>
 
 <script setup lang="ts">

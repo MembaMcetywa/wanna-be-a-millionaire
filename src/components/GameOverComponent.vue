@@ -1,5 +1,5 @@
 <template>
-  <div class="game-over-container">
+  <section class="game-over-container">
     <h2>Game over!</h2>
     <ul class="game-over-container-summary">
       <li>
@@ -16,7 +16,7 @@
       <CustomButton @click="restartGame">Restart Game</CustomButton>
       <CustomButton @click="navigateHome">Go Home</CustomButton>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -31,11 +31,11 @@ const correctAnswers = computed(() => store.correctAnswers)
 const winnings = computed(() => store.winnings)
 const router = useRouter()
 
-function restartGame() {
+const restartGame = () => {
   store.restartGame()
   router.push({ name: 'game' })
 }
-function navigateHome() {
+const navigateHome = () => {
   store.endGame()
   router.push({ name: 'home' })
 }

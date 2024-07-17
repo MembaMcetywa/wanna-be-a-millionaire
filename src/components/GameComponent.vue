@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <section class="game-container">
     <div class="game-container-details">
       <PlayerStatsComponent :totalScore="totalScore" :winnings="winnings" />
       <TimerComponent ref="timer" @timeOut="handleTimeOut" />
@@ -8,7 +8,7 @@
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -33,7 +33,7 @@ const winnings = computed(() => store.winnings)
 //instance of cash register sound to be played on cash out
 const ballerAlert = new Audio(cashOutSound)
 
-function handleAnswer(selectedOption: string) {
+const handleAnswer = (selectedOption: string) => {
   if (selectedOption === currentQuestion.value?.correctAnswer) {
     store.increaseScoreAndWinnings(currentQuestion.value.difficulty)
     if (currentIndex.value < store.questions.length - 1) {
@@ -47,17 +47,17 @@ function handleAnswer(selectedOption: string) {
   }
 }
 
-function handleCashOut() {
+const handleCashOut = () => {
   ballerAlert.play()
   handleGameEnd()
 }
 
-function handleTimeOut() {
+const handleTimeOut = () => {
   console.log("Time's up!")
   handleGameEnd()
 }
 
-function handleGameEnd() {
+const handleGameEnd = () => {
   store.endGame()
   if (timer.value) {
     clearInterval(timer.value.intervalId)
@@ -87,8 +87,6 @@ onMounted(() => {
 @media (min-width: 768px) {
   .game-container {
     width: 30rem;
-
-    /* gap: 1rem; */
   }
 }
 

@@ -1,13 +1,13 @@
 <template>
-  <CustomToast ref="errorModal" :message="errorMessage" :duration="30000" />
-  <div class="welcome-container">
-    <div class="welcome-container-header">
+  <CustomToast ref="errorModal" :message="errorMessage" />
+  <section class="welcome-container">
+    <header class="welcome-container-header">
       <h1 :style="{ color: headerColor }">Skyf A Million</h1>
       <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
-    </div>
+    </header>
     <StartButton @click="startGame">Start Game</StartButton>
     <p class="welcome-container-sub">Current Score: {{ totalScore }}</p>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -57,6 +57,7 @@ const startGame = () => {
     store.correctAnswers = 0
     router.push({ name: 'game' })
   } else {
+    errorMessage.value = 'Something went wrong while preparing questions, please try again.'
     console.error('Something went wrong while preparing questions, please try again.')
     return
   }
@@ -64,50 +65,6 @@ const startGame = () => {
 </script>
 
 <style scoped>
-@media (min-width: 1024px) {
-  .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
-  }
-
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
-  }
-}
-
 .welcome-container {
   display: flex;
   flex-direction: column;
