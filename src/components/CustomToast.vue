@@ -7,48 +7,35 @@
   </transition>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-import CustomButton from '../components/CustomButton.vue'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import CustomButton from './CustomButton.vue'
 
-export default defineComponent({
-  name: 'CustomToast',
-  props: {
-    message: {
-      type: String,
-      required: true
-    },
-    duration: {
-      type: Number,
-      required: false
-    }
+const props = defineProps({
+  message: {
+    type: String,
+    required: true
   },
-  setup(props) {
-    const isVisible = ref(false)
-
-    const show = () => {
-      isVisible.value = true
-      if (props.duration && props.duration > 0) {
-        setTimeout(() => {
-          isVisible.value = false
-        }, props.duration)
-      }
-    }
-
-    const close = () => {
-      isVisible.value = false
-    }
-
-    return {
-      isVisible,
-      show,
-      close
-    }
-  },
-  mounted() {
-    this.show()
+  duration: {
+    type: Number,
+    default: 1000
   }
 })
+
+//responsible for handling toast visibility. uses a given or default (1s) duration
+const isVisible = ref(false)
+const show = () => {
+  isVisible.value = true
+  setTimeout(() => {
+    isVisible.value = false
+  }, props.duration)
+}
+
+const close = () => {
+  isVisible.value = false
+}
+
+onMounted(show)
 </script>
 
 <style scoped>
@@ -71,13 +58,11 @@ export default defineComponent({
   top: 20px;
   transform: translateX(-50%);
   padding: 15px;
-  background: #f4f4f4;
+  background: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   font-size: 0.875rem;
   color: #0d0e10;
-  font-weight: bold;
 }
 </style>
