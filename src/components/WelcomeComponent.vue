@@ -6,7 +6,10 @@
       <p class="welcome-container-sub">No prep, just vibes. Guaranteed win. Click to start.</p>
     </header>
     <StartButton @click="startGame">Start Game</StartButton>
-    <p class="welcome-container-sub">Current Score: {{ totalScore }}</p>
+    <p class="welcome-container-sub">
+      Current Score: {{ totalScore }}
+      <span v-if="totalScore == 75" class="emoji">👑</span>
+    </p>
   </section>
 </template>
 
@@ -85,5 +88,19 @@ const startGame = () => {
   font-size: 0.8125rem;
   font-weight: 600;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.emoji {
+  font-size: 1rem;
+  line-height: 1;
 }
 </style>
