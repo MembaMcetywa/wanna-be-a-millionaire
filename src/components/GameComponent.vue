@@ -35,6 +35,7 @@ const winnings = computed(() => store.winnings)
 
 //instance of cash register sound to be played on cash out
 const ballerAlert = new Audio(cashOutSound)
+const feelingLuckyActive = ref<boolean>(false) //animation trigger
 
 const handleAnswer = (selectedOption: string) => {
   if (selectedOption === currentQuestion.value?.correctAnswer) {
