@@ -8,7 +8,7 @@
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
       <CustomButton v-if="!store.isRemoveWrongAnswersTriggered" @click="removeWrongAnswers"
-        >Feeling lucky</CustomButton
+        >Feeling Lucky</CustomButton
       >
     </div>
   </section>
@@ -120,7 +120,7 @@ onMounted(() => {
 .game-container-actions {
   display: flex;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 1rem;
   align-items: center;
   width: 100%;
 }
