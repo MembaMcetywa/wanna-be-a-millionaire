@@ -7,7 +7,11 @@
     </div>
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
-      <CustomButton v-if="!store.isRemoveWrongAnswersTriggered" @click="removeWrongAnswers"
+      <CustomButton
+        v-if="!store.isRemoveWrongAnswersTriggered"
+        @click="removeWrongAnswers"
+        class="feeling-lucky"
+        :key="animationKey"
         >Feeling Lucky</CustomButton
       >
     </div>
@@ -15,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useGameDetailsStore } from '../stores/gameDetailsStore'
 import QuestionComponent from './QuestionComponent.vue'
 import TimerComponent from './TimerComponent.vue'
@@ -27,7 +31,9 @@ import { useRouter } from 'vue-router'
 const store = useGameDetailsStore()
 const currentIndex = ref(0)
 const router = useRouter()
-const timer = ref<any | null>(null)
+const timer = ref<any>(null)
+const animationTimer = ref<any>(null)
+const animationKey = ref(0)
 
 const currentQuestion = computed(() => store.questions[currentIndex.value] || null)
 const totalScore = computed(() => store.score)
@@ -35,6 +41,7 @@ const winnings = computed(() => store.winnings)
 
 //instance of cash register sound to be played on cash out
 const ballerAlert = new Audio(cashOutSound)
+const feelingLuckyActive = ref(false) //animation trigger
 
 const handleAnswer = (selectedOption: string) => {
   if (selectedOption === currentQuestion.value?.correctAnswer) {
@@ -62,6 +69,14 @@ const removeWrongAnswers = () => {
   store.isRemoveWrongAnswersTriggered = true
 }
 
+const triggerFeelingLuckyAnimation = () => {
+  feelingLuckyActive.value = true
+  animationKey.value++
+  setTimeout(() => {
+    feelingLuckyActive.value = false
+  }, 1500)
+}
+
 const handleCashOut = () => {
   ballerAlert.play()
   handleGameEnd()
@@ -83,6 +98,13 @@ const handleGameEnd = () => {
 onMounted(() => {
   if (timer.value) {
     timer.value.restartTimer()
+  }
+  animationTimer.value = setInterval(triggerFeelingLuckyAnimation, 5000)
+})
+
+onUnmounted(() => {
+  if (animationTimer.value) {
+    clearInterval(animationTimer.value)
   }
 })
 </script>
@@ -123,5 +145,22 @@ onMounted(() => {
   gap: 1rem;
   align-items: center;
   width: 100%;
+}
+
+.feeling-lucky {
+  animation: pulse 1.5s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
