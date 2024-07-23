@@ -8,7 +8,7 @@
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
       <CustomButton v-if="!store.isRemoveWrongAnswersTriggered" @click="removeWrongAnswers"
-        >Double</CustomButton
+        >Feeling lucky</CustomButton
       >
     </div>
   </section>
@@ -50,13 +50,15 @@ const handleAnswer = (selectedOption: string) => {
   }
 }
 
-// has the user triggered the qn yes/no:
-//no -> conditionally render the Double button based on whether or not the user has triggered the action
-// ----> button to remove 2 wrong answers from options array in question object
-//yes -> continue , hide the button
-
 const removeWrongAnswers = () => {
   const correctAnswer = currentQuestion.value.correctAnswer
+  const options = currentQuestion.value.options
+  const wrongAnswers = options.filter((item) => item !== correctAnswer)
+  wrongAnswers.sort(() => Math.random() - 0.5)
+
+  const remainingWrongAnswers = wrongAnswers.slice(0, 1)
+  const finalOptions = [correctAnswer, ...remainingWrongAnswers]
+  currentQuestion.value.options = finalOptions
   store.isRemoveWrongAnswersTriggered = true
 }
 
