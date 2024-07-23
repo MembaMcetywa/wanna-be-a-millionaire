@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, computed } from 'vue'
 import type { Question } from '../utils/types'
+import { calculateRewards } from '../utils/helpes'
 
 const props = defineProps<{
   question: Question
@@ -32,27 +33,8 @@ const selectOption = (option: string) => {
 }
 
 const rewards = computed(() => {
-  let scoreIncrease = 0
-  let winningsIncrease = 0
+  const { scoreIncrease, winningsIncrease } = calculateRewards(props.question.difficulty)
 
-  switch (props.question.difficulty) {
-    case 'Easy':
-      scoreIncrease = 3
-      winningsIncrease = 50
-      break
-    case 'Medium':
-      scoreIncrease = 5
-      winningsIncrease = 80
-      break
-    case 'Hard':
-      scoreIncrease = 7
-      winningsIncrease = 200
-      break
-    case 'Very Hard':
-      scoreIncrease = 10
-      winningsIncrease = 300
-      break
-  }
   return { scoreIncrease, winningsIncrease }
 })
 </script>

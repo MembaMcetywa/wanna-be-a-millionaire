@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
-import type { Question } from '../utils/types'
+import type { Difficulty, Question } from '../utils/types'
 import router from '@/router'
+import { calculateRewards } from '../utils/helpes'
 
 export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const questions = ref<Question[]>([])
@@ -12,7 +13,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const correctAnswers = ref<number>(0)
   const currentIndex = ref<number>(0)
   const originalQuestions = ref<Question[]>([])
-  //keeping a copy of the original questions to use when reseting the options
+  //keeping a copy of the original question options to use when reseting the options whenever game is started / restarted
   questions.value = originalQuestions.value.map((q) => ({ ...q, options: [...q.options] }))
 
   const isRemoveWrongAnswersTriggered = ref<boolean>(false)
@@ -37,28 +38,8 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
     }
   }
 
-  const increaseScoreAndWinnings = (difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard') => {
-    let scoreIncrease = 0
-    let winningsIncrease = 0
-
-    switch (difficulty) {
-      case 'Easy':
-        scoreIncrease = 3
-        winningsIncrease = 50
-        break
-      case 'Medium':
-        scoreIncrease = 5
-        winningsIncrease = 80
-        break
-      case 'Hard':
-        scoreIncrease = 7
-        winningsIncrease = 200
-        break
-      case 'Very Hard':
-        scoreIncrease = 10
-        winningsIncrease = 300
-        break
-    }
+  const increaseScoreAndWinnings = (difficulty: Difficulty) => {
+    const { scoreIncrease, winningsIncrease } = calculateRewards(difficulty)
 
     score.value += scoreIncrease
     winnings.value += winningsIncrease
