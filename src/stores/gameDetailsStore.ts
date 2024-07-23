@@ -11,6 +11,8 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
   const correctAnswers = ref<number>(0)
   const currentIndex = ref<number>(0)
 
+  const isRemoveWrongAnswersTriggered = false
+
   const restartGame = () => {
     recentScore.value = score.value
     currentIndex.value = 0
@@ -71,6 +73,7 @@ export const useGameDetailsStore = defineStore('gameDetailsStore', () => {
     endGame,
     restartGame,
     fetchQuestions,
-    increaseScoreAndWinnings
+    increaseScoreAndWinnings,
+    isRemoveWrongAnswersTriggered
   }
 })
