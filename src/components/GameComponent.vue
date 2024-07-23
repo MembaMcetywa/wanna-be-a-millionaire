@@ -7,6 +7,9 @@
     </div>
     <div class="game-container-actions">
       <CustomButton @click="handleCashOut">Cash Out $$</CustomButton>
+      <CustomButton v-if="!store.isRemoveWrongAnswersTriggered" @click="removeWrongAnswers"
+        >Feeling Lucky</CustomButton
+      >
     </div>
   </section>
 </template>
@@ -45,6 +48,18 @@ const handleAnswer = (selectedOption: string) => {
   } else {
     handleGameEnd()
   }
+}
+
+const removeWrongAnswers = () => {
+  const correctAnswer = currentQuestion.value.correctAnswer
+  const options = currentQuestion.value.options
+  const wrongAnswers = options.filter((item) => item !== correctAnswer)
+  wrongAnswers.sort(() => Math.random() - 0.5)
+
+  const remainingWrongAnswers = wrongAnswers.slice(0, 1)
+  const finalOptions = [correctAnswer, ...remainingWrongAnswers]
+  currentQuestion.value.options = finalOptions
+  store.isRemoveWrongAnswersTriggered = true
 }
 
 const handleCashOut = () => {
@@ -105,6 +120,7 @@ onMounted(() => {
 .game-container-actions {
   display: flex;
   justify-content: center;
+  gap: 1rem;
   align-items: center;
   width: 100%;
 }
